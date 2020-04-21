@@ -3,6 +3,16 @@ from scipy.interpolate import InterpolatedUnivariateSpline
 from scipy.optimize import brentq
 import matplotlib.pyplot as plt
 
+KWT = {0:0.114e-14, 10:0.681e-14, 20: 0.929e-14, 25: 1.008e-14, 30: 1.469e-14, 40: 2.919e-14, 50: 5.474e-14, 60: 9.610e-14}
+
+class KW_T(object):
+    def __init__(self,werte=KWT):
+        werte = sorted(werte.items())
+        self.spline = InterpolatedUnivariateSpline([x for (x,y) in werte],[y for (x,y) in werte])
+
+    def __call__(self,t):
+        return float(self.spline(t))
+
 class Solute(object):
     def __init__(self,KS,CS=1,acid=True):
         '''
@@ -72,6 +82,7 @@ class Solute(object):
         return charge 
 
 
+
 class Solution(object):
 
     def __init__(self,*solutes):
@@ -91,9 +102,9 @@ class Solution(object):
         self.solutes = solutes
         for solute in solutes:
             solute.solution = self
-        self.Temp = Temp
+        self.Temp = 25
         self.kw = KW_T()
-        self.KW = self.kw(Temp)
+        self.KW = self.kw(25)
 
     def compute_total_volume(self):
         '''
