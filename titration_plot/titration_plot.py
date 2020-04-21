@@ -228,7 +228,7 @@ class Titration(Solution):
         # to_titrate (one solute) is variable, all other solutes are fixed
         Solution.__init__(self,*solutes)
         self.precision = 1000
-        self.delta = 1.0/plot_precision
+        self.delta = 1.0/self.precision
 
     def compute_PH(self,V_titrate):
         '''
@@ -283,3 +283,8 @@ class Titration(Solution):
         plt.title('Titration Curve')
         plt.show()
 
+if __name__ == "__main__":
+    acid = Solute(KS = [5.01e-7], CS = 2, acid = True) 
+    base = Solute(KS = [0.63], CS = 5, acid = False)
+    titration = Titration(base, acid)
+    titration.plot_titration(15, 25) 
