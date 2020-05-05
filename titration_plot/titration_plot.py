@@ -277,7 +277,7 @@ class Titration(Solution):
         plt.axhline(y=7,xmin=0,xmax=1,color='g')
         plt.axvline(x=V_rest_solutes[0]*self.rest_solutes[0].CS/self.to_titrate.CS,ymin=0,ymax=1,color='g')
         plt.axvline(x=2*V_rest_solutes[0]*self.rest_solutes[0].CS/self.to_titrate.CS,ymin=0,ymax=1,color='g')
-        plt.xlabel('Concentration')
+        plt.xlabel('Volume')
         plt.ylabel('pH')
         plt.grid(True)
         plt.title('Titration Curve')
